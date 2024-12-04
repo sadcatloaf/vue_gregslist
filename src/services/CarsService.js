@@ -4,6 +4,10 @@ import { Car } from "@/models/Car.js"
 import { AppState } from "@/AppState.js"
 
 class CarsService {
+  async deleteCar(carId) {
+    const response = await api.delete(`api/cars/${carId}`)
+    logger.log('DELETED CAR 💥', response.data)
+  }
 
   async getCars() {
     const response = await api.get('api/cars')

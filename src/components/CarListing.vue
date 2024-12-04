@@ -1,9 +1,25 @@
 <script setup>
 import { Car } from '@/models/Car.js';
+import { carsService } from '@/services/CarsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
 
-defineProps({
+const props = defineProps({
   carProp: { type: Car, required: true }
 })
+
+async function deleteCar() {
+  try {
+    const message = `Are you sure you want to delete your ${props.carProp.make} ${props.carProp.model}?`
+    const confirmed = await Pop.confirm(message)
+    if (!confirmed) { return }
+    const carId = props.carProp.id
+    await carsService.deleteCar(carId)
+  } catch (error) {
+    Pop.meow(error)
+    logger.error('[DELETING CAR]', error)
+  }
+}
 </script>
 
 
@@ -20,9 +36,12 @@ defineProps({
           <p>{{ carProp.description }}</p>
           <p>Listed on {{ carProp.createdAt.toLocaleDateString() }}</p>
         </div>
-        <div class="text-end">
+        <div class="d-flex justify-content-end gap-3 align-items-center">
+          <button @click="deleteCar()" class="btn btn-outline-danger" type="button" title="Delete Car">
+            <i class="mdi mdi-delete-forever"></i>
+          </button>
           <span>{{ carProp.creator.name }}</span>
-          <img :src="carProp.creator.picture" :alt="carProp.creator.name" class="creator-img ms-3">
+          <img :src="carProp.creator.picture" :alt="carProp.creator.name" class="creator-img">
         </div>
       </div>
     </div>
