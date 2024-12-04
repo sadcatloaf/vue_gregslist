@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import CarForm from '@/components/CarForm.vue';
 import CarListing from '@/components/CarListing.vue';
 import { carsService } from '@/services/CarsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -33,7 +34,13 @@ async function getCars() {
     </section>
 
     <section class="row">
-      <div v-for="car in cars" :key="car.id" class="col-12">
+      <div class="col-12">
+        <CarForm />
+      </div>
+    </section>
+
+    <section class="row">
+      <div v-for="car in cars" :key="car.id" class="col-12 mb-3">
         <CarListing :carProp="car" />
       </div>
     </section>
