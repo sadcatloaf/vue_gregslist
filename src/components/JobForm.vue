@@ -1,9 +1,11 @@
 <script setup>
+import { AppState } from '@/AppState';
 import { jobsService } from '@/services/JobsService';
 import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
+const account = computed(() => AppState.account)
 
 const editableJobData = ref({
     hours: 0,
@@ -36,36 +38,38 @@ async function createJob() {
 
 
 <template>
-    <form @submit.prevent="createJob()">
-        <div class="form-floating mb-3">
-            <input v-model="editableJobData.jobTitle" type="text" class="form-control" id="jobTitle"
-                placeholder="JobTitle..." required maxlength="500">
-            <label for="JobTitle">JobTitle</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input v-model="editableJobData.company" type="text" class="form-control" id="company"
-                placeholder="Company..." required maxlength="500">
-            <label for="Company">Company</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input v-model="editableJobData.hours" type="number" class="form-control" id="hour" placeholder="Hours..."
-                required maxlength="500">
-            <label for="Hours">Hours</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input v-model="editableJobData.rate" type="number" class="form-control" id="rate" placeholder="Rate..."
-                required maxlength="500">
-            <label for="Rate">Rate</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input v-model="editableJobData.description" type="text" class="form-control" id="description"
-                placeholder="Description..." required maxlength="500">
-            <label for="Description">Description</label>
-        </div>
-        <div class="text-end">
-            <button class="btn btn-success" type="submit">Submit</button>
-        </div>
-    </form>
+    <div v-if="account != null">
+        <form @submit.prevent="createJob()">
+            <div class="form-floating mb-3">
+                <input v-model="editableJobData.jobTitle" type="text" class="form-control" id="jobTitle"
+                    placeholder="JobTitle..." required maxlength="500">
+                <label for="JobTitle">JobTitle</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input v-model="editableJobData.company" type="text" class="form-control" id="company"
+                    placeholder="Company..." required maxlength="500">
+                <label for="Company">Company</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input v-model="editableJobData.hours" type="number" class="form-control" id="hour"
+                    placeholder="Hours..." required maxlength="500">
+                <label for="Hours">Hours</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input v-model="editableJobData.rate" type="number" class="form-control" id="rate" placeholder="Rate..."
+                    required maxlength="500">
+                <label for="Rate">Rate</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input v-model="editableJobData.description" type="text" class="form-control" id="description"
+                    placeholder="Description..." required maxlength="500">
+                <label for="Description">Description</label>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </template>
 
 
