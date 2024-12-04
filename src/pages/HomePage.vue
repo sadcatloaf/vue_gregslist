@@ -14,7 +14,9 @@
       <div class="col-12">
         <div class="d-flex justify-content-center">
           <router-link :to="{ name: 'Cars' }">
-            <button class="btn btn-success">Cars 🚗</button>
+            <button class="btn btn-success m-2">Cars 🚗</button>
+            <button class="btn btn-success m-2">Houses 🏘️</button>
+            <button class="btn btn-success m-2">Jobs 👷‍♂️</button>
           </router-link>
         </div>
       </div>
