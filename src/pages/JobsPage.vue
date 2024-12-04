@@ -14,7 +14,7 @@ async function getJobs() {
         await jobsService.getJobs()
     } catch (error) {
         Pop.error(error)
-        logger.error('[Get 🏘️🏘️]', error)
+        logger.error('[Get 👷‍♂️👷‍♂️]', error)
     }
 }
 
