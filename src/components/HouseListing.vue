@@ -1,11 +1,24 @@
 <script setup>
 import { House } from '@/models/House';
+import { logger } from '@/utils/Logger';
+import Pop from '@/utils/Pop';
 
 
-defineProps({
+const props = defineProps({
     houseProp: { type: House, required: true }
 })
 
+async function deleteHouse() {
+    try {
+        const message = 'Are you sure you want to DELETE this house?'
+        const confirmed = await Pop.confirm(message)
+        if (!confirmed) { return }
+    }
+    catch (error) {
+        Pop.meow(error);
+        logger.error('[Deleting House]', error)
+    }
+}
 </script>
 
 
