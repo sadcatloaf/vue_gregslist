@@ -1,4 +1,7 @@
 <script setup>
+import { carsService } from '@/services/CarsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
 import { ref } from 'vue';
 
 const engineTypes = [
@@ -26,11 +29,20 @@ const editableCarData = ref({
   color: '#000000'
 })
 
+async function createCar() {
+  try {
+    await carsService.createCar(editableCarData.value)
+  } catch (error) {
+    logger.error('[CREATING CAR]', error)
+    Pop.meow(error)
+  }
+}
+
 </script>
 
 
 <template>
-  <form>
+  <form @submit.prevent="createCar()">
     <div class="form-floating mb-3">
       <input v-model="editableCarData.make" type="text" class="form-control" id="make" placeholder="Car Make..."
         required maxlength="500">
@@ -53,7 +65,7 @@ const editableCarData = ref({
     </div>
     <div class="mb-3">
       <label for="price" class="form-label">Car Price</label>
-      <input v-model="editableCarData.price" type="range" class="form-range" id="price" max="1000000" min="0">
+      <input v-model="editableCarData.price" type="range" class="form-range" id="price" max="1000000" min="0" required>
     </div>
     <div class="form-floating mb-3">
       <textarea v-model="editableCarData.description" class="form-control" placeholder="Car Description"
