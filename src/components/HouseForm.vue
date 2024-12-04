@@ -19,6 +19,16 @@ const editableHouseData = ref({
 async function createHouse() {
     try {
         await housesService.createHouse(editableHouseData.value)
+        editableHouseData.value = {
+            bedrooms: 0,
+            bathrooms: 0,
+            imgUrl: '',
+            levels: 0,
+            price: 0,
+            description: '',
+            year: new Date().getFullYear()
+        }
+        Pop.success('House successfully listed! 🏘️📃')
     }
     catch (error) {
         logger.error('[Creating 🏘️]', error)

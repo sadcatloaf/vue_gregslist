@@ -16,6 +16,14 @@ const editableJobData = ref({
 async function createJob() {
     try {
         await jobsService.createJob(editableJobData.value)
+        editableJobData.value = {
+            hours: 0,
+            company: '',
+            rate: 0,
+            description: '',
+            jobTitle: ''
+        }
+        Pop.success('Job successfully Lsited! 👷‍♂️📃')
     }
     catch (error) {
         logger.error('[Creating 👷‍♂️]', error)
