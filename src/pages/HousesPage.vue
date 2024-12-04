@@ -1,6 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState';
-import { House } from '@/models/House';
+import HouseListing from '@/components/HouseListing.vue';
 import { housesService } from '@/services/HousesService';
 import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
@@ -29,8 +29,8 @@ async function getHouses() {
             </div>
         </section>
         <section class="row">
-            <div class="col-12">
-                {{ houses }}
+            <div v-for="house in houses" :key="house.id" class="col-12">
+                <HouseListing :house-prop="house" />
             </div>
         </section>
     </div>

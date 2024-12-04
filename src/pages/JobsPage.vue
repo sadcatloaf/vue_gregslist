@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState';
+import JobListing from '@/components/JobListing.vue';
 import { jobsService } from '@/services/JobsService';
 import { logger } from '@/utils/Logger';
 import Pop from '@/utils/Pop';
@@ -29,8 +30,8 @@ async function getJobs() {
             </div>
         </section>
         <section class="row">
-            <div class="col-12">
-                {{ jobs }}
+            <div v-for="job in jobs" :key="job.id" class="col-12">
+                <JobListing :job-prop="job" />
             </div>
         </section>
     </div>
