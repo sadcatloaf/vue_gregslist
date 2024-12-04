@@ -32,6 +32,18 @@ const editableCarData = ref({
 async function createCar() {
   try {
     await carsService.createCar(editableCarData.value)
+    // NOTE clears form!
+    editableCarData.value = {
+      make: '',
+      model: '',
+      imgUrl: '',
+      year: new Date().getFullYear(),
+      price: 0,
+      description: '',
+      engineType: 'unknown',
+      color: '#000000'
+    }
+    Pop.success('Car successfully listed! 👍')
   } catch (error) {
     logger.error('[CREATING CAR]', error)
     Pop.meow(error)
