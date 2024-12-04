@@ -64,7 +64,7 @@ async function createCar() {
       <label for="year">Car Year</label>
     </div>
     <div class="mb-3">
-      <label for="price" class="form-label">Car Price</label>
+      <label for="price" class="form-label">Car Price: ${{ editableCarData.price }}</label>
       <input v-model="editableCarData.price" type="range" class="form-range" id="price" max="1000000" min="0" required>
     </div>
     <div class="form-floating mb-3">
@@ -79,7 +79,7 @@ async function createCar() {
           {{ engineType }}
         </option>
       </select>
-      <label for="engineType">Works with selects</label>
+      <label for="engineType">Engine Type</label>
     </div>
     <div class="mb-3">
       <label for="color" class="form-label">Car Color</label>
