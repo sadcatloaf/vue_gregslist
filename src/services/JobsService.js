@@ -8,6 +8,8 @@ class JobsService {
    async createJob(editableJobData) {
        const response = await api.post('api/jobs', editableJobData)
        logger.log('Created 👷‍♂️', response.data)
+       const job = new Job(response.data)
+       AppState.jobs.push(job)
     }
 
     async getJobs() {
