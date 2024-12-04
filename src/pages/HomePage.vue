@@ -15,7 +15,11 @@
         <div class="d-flex justify-content-center">
           <router-link :to="{ name: 'Cars' }">
             <button class="btn btn-success m-2">Cars 🚗</button>
+          </router-link>
+          <router-link :to="{ name: 'Houses' }">
             <button class="btn btn-success m-2">Houses 🏘️</button>
+          </router-link>
+          <router-link :to="{ name: 'Jobs' }">
             <button class="btn btn-success m-2">Jobs 👷‍♂️</button>
           </router-link>
         </div>
