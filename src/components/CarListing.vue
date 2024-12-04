@@ -41,6 +41,7 @@ async function deleteCar() {
           <p>Listed on {{ carProp.createdAt.toLocaleDateString() }}</p>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center">
+          <!-- NOTE elvis operator ? will check to see if the left hand side of the object is null or undefined before accessing properties -->
           <button v-if="account?.id == carProp.creatorId" @click="deleteCar()" class="btn btn-outline-danger"
             type="button" title="Delete Car">
             <i class="mdi mdi-delete-forever"></i>

@@ -7,6 +7,13 @@ class CarsService {
   async deleteCar(carId) {
     const response = await api.delete(`api/cars/${carId}`)
     logger.log('DELETED CAR 💥', response.data)
+    const carIndex = AppState.cars.findIndex(car => car.id == carId)
+
+    if (carIndex == -1) {
+      throw new Error("You messed up on findIndex, big dawg")
+    }
+
+    AppState.cars.splice(carIndex, 1)
   }
 
   async getCars() {
