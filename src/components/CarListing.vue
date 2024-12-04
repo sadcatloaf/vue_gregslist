@@ -1,12 +1,16 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Car } from '@/models/Car.js';
 import { carsService } from '@/services/CarsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
+import { computed } from 'vue';
 
 const props = defineProps({
   carProp: { type: Car, required: true }
 })
+
+const account = computed(() => AppState.account)
 
 async function deleteCar() {
   try {
@@ -37,7 +41,8 @@ async function deleteCar() {
           <p>Listed on {{ carProp.createdAt.toLocaleDateString() }}</p>
         </div>
         <div class="d-flex justify-content-end gap-3 align-items-center">
-          <button @click="deleteCar()" class="btn btn-outline-danger" type="button" title="Delete Car">
+          <button v-if="account?.id == carProp.creatorId" @click="deleteCar()" class="btn btn-outline-danger"
+            type="button" title="Delete Car">
             <i class="mdi mdi-delete-forever"></i>
           </button>
           <span>{{ carProp.creator.name }}</span>
