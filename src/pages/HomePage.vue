@@ -13,7 +13,9 @@
     <section class="row">
       <div class="col-12">
         <div class="d-flex justify-content-center">
-          <button class="btn btn-success">Cars 🚗</button>
+          <router-link :to="{ name: 'Cars' }">
+            <button class="btn btn-success">Cars 🚗</button>
+          </router-link>
         </div>
       </div>
     </section>
