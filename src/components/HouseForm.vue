@@ -1,4 +1,7 @@
 <script setup>
+import { housesService } from '@/services/HousesService';
+import { logger } from '@/utils/Logger';
+import Pop from '@/utils/Pop';
 import { ref } from 'vue';
 
 
@@ -9,15 +12,31 @@ const editableHouseData = ref({
     imgUrl: '',
     levels: 0,
     price: 0,
-    description: ''
+    description: '',
+    year: new Date().getFullYear()
 })
+
+async function createHouse() {
+    try {
+        await housesService.createHouse(editableHouseData.value)
+    }
+    catch (error) {
+        logger.error('[Creating 🏘️]', error)
+        Pop.meow(error);
+    }
+}
 
 
 </script>
 
 
 <template>
-    <form>
+    <form @submit.prevent="createHouse()">
+        <div class="form-floating mb-3">
+            <input v-model="editableHouseData.year" type="number" class="form-control" id="year"
+                placeholder="Car Year..." required :max="new Date().getFullYear() + 1" min="1875">
+            <label for="year">House Year</label>
+        </div>
         <div class="form-floating mb-3">
             <input v-model="editableHouseData.bathrooms" type="number" class="form-control" id="bathroom"
                 placeholder="Bathroom..." required maxlength="500">

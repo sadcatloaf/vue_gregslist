@@ -5,7 +5,6 @@ export class Job {
         this.jobTitle = data.jobTitle
         this.rate = data.rate
         this.hours = data.hours
-        this.price = data.price
         this.description = data.description
         this.creatorId = data.creatorId
         this.createdAt = new Date(data.createdAt)

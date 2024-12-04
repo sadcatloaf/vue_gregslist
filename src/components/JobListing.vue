@@ -18,6 +18,7 @@ defineProps({
                     <h3>
                         Company: {{ jobProp.company }}
                     </h3>
+                    <p>{{ jobProp.jobTitle }}</p>
                     <p>Hours: {{ jobProp.hours }} Rate: {{ jobProp.rate }}</p>
                     <p>{{ jobProp.description }}</p>
                     <p>Listed on {{ jobProp.createdAt.toLocaleDateString() }}</p>

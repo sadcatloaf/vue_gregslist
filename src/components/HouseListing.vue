@@ -18,9 +18,8 @@ defineProps({
             <div class="p-2 d-flex flex-column justify-content-between h-100">
                 <div>
                     <h2>{{ houseProp.description }}</h2>
-                    <p>Levels: {{ houseProp.levels }} Bathrooms: {{ houseProp.bathrooms }} Bedrooms: {{
-                        houseProp.bedrooms
-                    }}</p>
+                    <p>Levels: {{ houseProp.levels }} Bathrooms: {{ houseProp.bathrooms }} Bedrooms:
+                        {{ houseProp.bedrooms }} {{ houseProp.year }}</p>
                     <p>${{ houseProp.price }}</p>
                     <p>Listed on {{ houseProp.createdAt.toLocaleDateString() }}</p>
                 </div>

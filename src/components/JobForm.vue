@@ -1,4 +1,7 @@
 <script setup>
+import { jobsService } from '@/services/JobsService';
+import { logger } from '@/utils/Logger';
+import Pop from '@/utils/Pop';
 import { ref } from 'vue';
 
 
@@ -6,19 +9,34 @@ const editableJobData = ref({
     hours: 0,
     company: '',
     rate: 0,
-    description: ''
+    description: '',
+    jobTitle: ''
 })
 
+async function createJob() {
+    try {
+        await jobsService.createJob(editableJobData.value)
+    }
+    catch (error) {
+        logger.error('[Creating 👷‍♂️]', error)
+        Pop.meow(error);
+    }
+}
 
 
 </script>
 
 
 <template>
-    <form>
+    <form @submit.prevent="createJob()">
         <div class="form-floating mb-3">
-            <input v-model="editableJobData.rate" type="text" class="form-control" id="company" placeholder="Company..."
-                required maxlength="500">
+            <input v-model="editableJobData.jobTitle" type="text" class="form-control" id="jobTitle"
+                placeholder="JobTitle..." required maxlength="500">
+            <label for="JobTitle">JobTitle</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input v-model="editableJobData.company" type="text" class="form-control" id="company"
+                placeholder="Company..." required maxlength="500">
             <label for="Company">Company</label>
         </div>
         <div class="form-floating mb-3">
@@ -27,7 +45,7 @@ const editableJobData = ref({
             <label for="Hours">Hours</label>
         </div>
         <div class="form-floating mb-3">
-            <input v-model="editableJobData.company" type="number" class="form-control" id="rate" placeholder="Rate..."
+            <input v-model="editableJobData.rate" type="number" class="form-control" id="rate" placeholder="Rate..."
                 required maxlength="500">
             <label for="Rate">Rate</label>
         </div>

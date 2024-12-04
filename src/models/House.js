@@ -12,5 +12,6 @@ export class House {
         this.updatedAt = new Date(data.updatedAt)
         this.creator = data.creator
         this.color = data.color || '000000'
+        this.year = data.year
     }
 }
