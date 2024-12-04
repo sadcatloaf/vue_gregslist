@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState';
+import JobForm from '@/components/JobForm.vue';
 import JobListing from '@/components/JobListing.vue';
 import { jobsService } from '@/services/JobsService';
 import { logger } from '@/utils/Logger';
@@ -27,6 +28,11 @@ async function getJobs() {
         <section class="row mb-3">
             <div class="col-12">
                 <h1 class="text-center">Jobs</h1>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-12">
+                <JobForm />
             </div>
         </section>
         <section class="row">
